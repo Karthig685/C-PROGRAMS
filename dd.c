@@ -42,6 +42,7 @@ void pr(struct Node* head){
         temp=temp->next;
     }
     printf("NULL\n");
+    free(temp);
 }
 
 int main(){

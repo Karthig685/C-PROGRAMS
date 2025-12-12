@@ -1,0 +1,17 @@
+###############################
+# myapp Public Interfaces
+###############################
+
+interface(`myapp_allow_read_logs',`
+    gen_require(`
+        type myapp_log_t;
+    ')
+    allow $1 myapp_log_t:file read;
+')
+
+interface(`myapp_allow_write_logs',`
+    gen_require(`
+        type myapp_log_t;
+    ')
+    allow $1 myapp_log_t:file { write append };
+')

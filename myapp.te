@@ -1,0 +1,29 @@
+policy_module(myapp, 1.0)
+
+#################################
+# Type and Domain Declarations
+#################################
+
+# The domain in which the process will run
+type myapp_t;
+type myapp_exec_t;
+
+# Allow this binary to transition into myapp_t
+init_daemon_domain(myapp_t, myapp_exec_t)
+
+# For logs
+type myapp_log_t;
+logging_log_file(myapp_log_t)
+
+#################################
+# Allow Rules
+#################################
+
+# Allow myapp to read configs
+allow myapp_t etc_t:file { read open };
+
+# Allow myapp to write logs
+allow myapp_t myapp_log_t:file { create write append open };
+
+# Allow myapp to connect to the network
+allow myapp_t port_t:tcp_socket { name_connect };
